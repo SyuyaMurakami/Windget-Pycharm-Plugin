@@ -1,1 +1,1 @@
-rootProject.name = "IDEA"
+rootProject.name = "windget"

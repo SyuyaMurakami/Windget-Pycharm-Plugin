@@ -14,9 +14,14 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
+    Welcome to use windget.
+
     This is a pycharm plugin designed for python library windget. windget is the third-party Win.d API for python.
     For better use of windget in pycharm, this plugin provides code completion and guidance with Chinese. If you see
     meanless code in code completion list, you should change the pycharm encoding from GBK to UTF-8.
+
+    To use this plugin, you should install python and windget library for python. Usually, use "pip install windget"
+    will prepare you good. Remember to add "from windget import *" to your python source file.
   ]]></description>
 
     <!-- Product and plugin compatibility requirements.

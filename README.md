@@ -1,2 +1,3 @@
 # Windget-Pycharm-Plugin
- This is the pycharm plugin for python library windget.
+## Welcome to use windget
+ windget is a pycharm plugin for python library windget.
