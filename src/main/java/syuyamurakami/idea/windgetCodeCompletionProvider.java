@@ -22,9 +22,14 @@ public class windgetCodeCompletionProvider extends CompletionProvider<Completion
         int size = this.size;
         ArrayList attr = this.attr;
         String[] rec;
-        for (int i = 1;i<size;i++){
-            rec = (String[]) attr.get(i);
-            result.addElement(LookupElementBuilder.create("get"+rec[2]).withCaseSensitivity(true).withPresentableText(rec[0]+"->get"+rec[2]).withIcon(AllIcons.Nodes.Function));
+        String prefix;
+        prefix = result.getPrefixMatcher().toString();
+        if (prefix.startsWith("g")){
+            for (int i = 1;i<size;i++){
+                rec = (String[]) attr.get(i);
+                result.addElement(LookupElementBuilder.create("get"+rec[2]).withCaseSensitivity(true).withPresentableText(rec[0]+"->get"+rec[2]).withIcon(AllIcons.Nodes.Function));
+            }
         }
+
     }
 }
