@@ -1,36 +1,40 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.5.2"
+    id("org.jetbrains.intellij.platform") version "2.18.1"
 }
 
 group = "SyuyaMurakami"
-version = "1.2"
+version = "1.3"
 
 repositories {
-//
     mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
-// Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
-intellij {
-    version.set("2022.1")
-    type.set("PC") // Target IDE Platform
-    updateSinceUntilBuild.set(false)
-    downloadSources.set(false)
-    plugins.set(listOf("python-ce"/* Plugin Dependencies */))
+dependencies {
+    intellijPlatform {
+        pycharm("2025.3")
+        bundledPlugin("PythonCore")
+    }
 }
 
 tasks {
-    // Set the JVM compatibility versions
     withType<JavaCompile> {
-        sourceCompatibility = "11"
-        targetCompatibility = "11"
         options.encoding="UTF-8"
     }
 
+    java {
+        toolchain {
+            languageVersion.set(
+                JavaLanguageVersion.of(25)
+            )
+        }
+    }
+
     patchPluginXml {
-        sinceBuild.set("212")
-        untilBuild.set("222.*")
+        sinceBuild.set("262")
     }
 
     signPlugin {
