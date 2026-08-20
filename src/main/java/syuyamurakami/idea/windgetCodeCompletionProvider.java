@@ -23,7 +23,7 @@ public class windgetCodeCompletionProvider extends CompletionProvider<Completion
     protected void addCompletions(@NotNull CompletionParameters parameters,
                                   ProcessingContext context,
                                   @NotNull CompletionResultSet result) {
-        result.restartCompletionOnPrefixChange(StandardPatterns.string().startsWith("get"));
+        result.restartCompletionOnPrefixChange(StandardPatterns.string().startsWith("g"));
         String rawPrefix = result.getPrefixMatcher().getPrefix();
         String chinesePart = extractTrailingChinese(rawPrefix);
         CompletionResultSet getBranch = result.withPrefixMatcher(rawPrefix);
@@ -33,19 +33,22 @@ public class windgetCodeCompletionProvider extends CompletionProvider<Completion
         String[] rec;
 
         if (rawPrefix.startsWith("get")) {
-            for (int i = 1; i < size; i++) {
-                rec = (String[]) attr.get(i);
-                getBranch.addElement(
-                        LookupElementBuilder.create("get" + rec[2])
-                                .withCaseSensitivity(true)
-                                .withPresentableText(rec[0] + " -> get" + rec[2])
-                                .withIcon(AllIcons.Nodes.Function)
-                );
-                if (!chinesePart.isEmpty()) {
-                    CompletionResultSet cnBranch = result.withPrefixMatcher(new PlainPrefixMatcher(chinesePart));
+            if (!chinesePart.isEmpty()) {
+                CompletionResultSet cnBranch = result.withPrefixMatcher(new windgetContainsPrefixMatcher(chinesePart));
+                for (int i = 1; i < size; i++) {
+                    rec = (String[]) attr.get(i);
                     cnBranch.addElement(
                             LookupElementBuilder.create(rec[2])
                                     .withLookupString(rec[0])
+                                    .withPresentableText(rec[0] + " -> get" + rec[2])
+                                    .withIcon(AllIcons.Nodes.Function)
+                    );
+                }
+            } else {
+                for (int i = 1; i < size; i++) {
+                    rec = (String[]) attr.get(i);
+                    getBranch.addElement(
+                            LookupElementBuilder.create("get" + rec[2])
                                     .withCaseSensitivity(true)
                                     .withPresentableText(rec[0] + " -> get" + rec[2])
                                     .withIcon(AllIcons.Nodes.Function)
