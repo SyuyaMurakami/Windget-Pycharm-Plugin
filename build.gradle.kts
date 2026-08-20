@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        pycharm("2025.3")
+        pycharm("2026.2")
         bundledPlugin("PythonCore")
     }
 }
